@@ -25,7 +25,18 @@ fun BottomNavigationUi(navController: NavController) {
     ) {
         items.forEach { item ->
             Column(modifier = Modifier.weight(1f).clickable {
-                navController.navigate(item.screenRoute)
+                navController.navigate(item.screenRoute){
+                    navController.graph.startDestinationRoute?.let { route ->
+                        popUpTo(route) {
+                            saveState = true
+                        }
+                    }
+                    // Avoid multiple copies of the same destination when
+                    // reselecting the same item
+                    launchSingleTop = true
+                    // Restore state when reselecting a previously selected item
+                    restoreState = true
+                }
             }, horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Icon(painter = painterResource(id = item.icon), contentDescription = item.title)

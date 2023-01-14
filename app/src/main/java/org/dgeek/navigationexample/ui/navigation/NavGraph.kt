@@ -18,7 +18,6 @@ fun NavigationGraph(
 ) {
     NavHost(navController = navController, startDestination = NavItem.Home.screenRoute) {
         composable(NavItem.Home.screenRoute) { backEntry ->
-//            backEntry.
             HomeScreen(
                 modifier
             )
